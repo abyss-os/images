@@ -14,7 +14,7 @@ crun() {
 }
 # create base rootfs
 apka() {
-    apk add -X "$ABYSS_CORE" --no-cache --allow-untrusted --initdb --root rootfs "$@"
+    apk add -X "$ABYSS_CORE" --allow-untrusted --initdb --root rootfs "$@"
 }
 
 # get prereqs
@@ -26,6 +26,9 @@ echo "$ABYSS_DEV" >> rootfs/etc/apk/repositories
 
 # default resolv.conf
 echo nameserver 1.1.1.1 > rootfs/etc/resolv.conf
+
+# apk fix busybox, because apk broken
+crun apk fix busybox
 
 # enable services
 crun ln -s /etc/init.d/getty /etc/init.d/getty.console
