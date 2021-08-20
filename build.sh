@@ -1,4 +1,7 @@
 #!/bin/sh
+
+# upgrade first
+apk --no-cache upgrade -a
 rm -rf rootfs
 
 ARCH=$(apk --print-arch)
