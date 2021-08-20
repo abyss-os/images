@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # upgrade first
-apk --no-cache upgrade -a
+apk -U upgrade -a
 rm -rf rootfs
 
 ARCH=$(apk --print-arch)
@@ -38,6 +38,9 @@ crun rc-update add loopback sysinit
 
 # NO, NOT ALLOWED
 crun sed -i 's/^persistent/#persistent/' /etc/dhcpcd.conf
+
+# cleanup
+rm -rf rootfs/var/cache/apk && mkdir rootfs/var/cache/apk
 
 # create squashfs base
 echo "system.squashfs"
