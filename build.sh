@@ -28,7 +28,7 @@ echo "$ABYSS_DEV" >> rootfs/etc/apk/repositories
 echo nameserver 1.1.1.1 > rootfs/etc/resolv.conf
 
 # apk fix busybox, because apk broken
-crun apk fix busybox
+crun apk fix $(crun apk info)
 
 # enable services
 crun ln -s /etc/init.d/getty /etc/init.d/getty.console
@@ -45,3 +45,7 @@ rm -rf rootfs/var/cache/apk && mkdir rootfs/var/cache/apk
 # create squashfs base
 echo "system.squashfs"
 mksquashfs rootfs system.squashfs -all-root
+
+# rootfs.tar.gz
+echo "rootfs.tar.zst"
+(cd rootfs && bsdtar caf ../rootfs.tar.zst rootfs .)
