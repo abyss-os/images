@@ -1,4 +1,5 @@
 #!/bin/sh
+TOPDIR=$PWD
 
 # upgrade first
 apk -U upgrade -a
@@ -48,4 +49,4 @@ mksquashfs rootfs system.squashfs -all-root
 
 # rootfs.tar.gz
 echo "rootfs.tar.zst"
-(cd rootfs && bsdtar caf ../rootfs.tar.zst rootfs .)
+crun bsdtar cf - . | zstd -v -9 -c > rootfs.tar.zst
