@@ -21,7 +21,7 @@ apka() {
 # get prereqs
 apk add squashfs-tools
 
-apka abyss-base
+apka abyss-base bsdtar
 echo "$ABYSS_CORE" > rootfs/etc/apk/repositories
 echo "$ABYSS_DEV" >> rootfs/etc/apk/repositories
 

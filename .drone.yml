@@ -71,28 +71,3 @@ steps:
   when:
     branch:
     - master
-
----
-kind: pipeline
-type: exec
-name: mips64
-
-platform:
-  os: linux
-  arch: mips64
-
-steps:
-- name: build
-  commands:
-  - /bin/sh ./build.sh
-
-- name: upload
-  commands:
-  - apk add minio-client
-  - /bin/sh ./upload.sh
-  environment:
-    MC_HOST_master:
-      from_secret: MC_HOST_master
-  when:
-    branch:
-    - master
